@@ -1,0 +1,22 @@
+.user-list-info-container {
+    overflow: hidden;
+}
+
+.user-list-avatar {
+    float:left;
+    height:18px;
+    width: auto;
+    padding-top: 1px;
+    padding-bottom: 1px;
+    padding-right: 3px;
+}
+
+.user-list-text {
+    float: left;
+    color: darkgray;
+    cursor: pointer
+}
+.user-list-text:hover {
+    color: black;
+    text-decoration: underline;
+}

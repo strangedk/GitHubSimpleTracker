@@ -1,0 +1,50 @@
+.user-info-container-selected {
+    width: 100%;
+    margin: 3px;
+    padding: 10px;
+    height: 40px;
+}
+
+.user-info-container-selected:hover > .closeButton {
+    opacity: 0.5;
+}
+
+.avatar {
+    height: 40px;
+    width: auto;
+    float: left;
+    padding: 1px;
+    border-radius: 5px;
+}
+
+.user-text-container {
+    float: left;
+    line-height: 12px;
+}
+
+.user-text {
+    color: cornflowerblue;
+    cursor: pointer;
+    float: left;
+    padding-left: 10px;
+    padding-top: 5px;
+}
+
+.user-text:hover {
+    text-decoration: underline;
+}
+
+.close-button {
+    line-height: 40px;
+    display: inline;
+    color: indianred;
+    position: revert;
+    float: right;
+    opacity: 0.15;
+    transition: opacity 200ms;
+    cursor: pointer;
+}
+
+.close-button:hover {
+    opacity: 1;
+}

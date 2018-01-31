@@ -1,0 +1,32 @@
+body {
+    display: inline-block;
+    color: darkolivegreen;
+    border-radius: 5px;
+    width: 100%;
+    box-shadow: 1px 1px 2px grey;
+    padding: 10px;
+    margin: 3px;
+}
+
+.app-container {
+    float: left;
+}
+
+.select-user-message {
+    font-size: 40px;
+    color: #000;
+    opacity: 0.10;
+    position: absolute;
+    top: 30%;
+    left: 20%;
+
+    animation-duration: 0.5s;
+    animation-name: text-tween;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+@keyframes text-tween {
+    from { left: 225px; }
+    to { left: 260px; }
+}

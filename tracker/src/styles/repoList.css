@@ -1,0 +1,21 @@
+.repos-container {
+    height:100%;
+    background: cornsilk;
+    display: inline-block;
+    max-height:400px;
+    max-width: 500px;
+    padding: 10px;
+    margin: 3px;
+    overflow: scroll;
+    border-radius: 5px;
+    box-shadow: 1px 1px 2px grey;
+}
+
+.repos-item {
+    color: darkgray;
+    cursor: pointer
+}
+
+.repos-item:hover {
+    text-decoration: underline;
+}
