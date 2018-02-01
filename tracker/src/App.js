@@ -9,8 +9,12 @@ import CommitChart from "./components/commitChart";
 import "./styles/App.css";
 
 class App extends Component {
-    // Select users with > 1000 repos in the account.
-    GET_USERS_URL = "https://api.github.com/search/users?q=repos:%3E3000&per_page=1000";
+    // Request users with > 3000 repos in the account.
+    // Pagination was dropped consciously in all the requests
+
+    // WARNING: Unauthorizated requests to github API is limited by 10 requests per minute,
+    // So test please carefully, for except 403 response.
+    GET_USERS_URL = "https://api.github.com/search/users?q=repos:%3E3000&per_page=100";
 
     userChangedHandler = (currentUser) => {
         this.setState({
@@ -39,8 +43,6 @@ class App extends Component {
     componentDidMount() {
         axios.get(this.GET_USERS_URL)
             .then(response => {
-                console.log("axios response:");
-                console.log(response.data);
                 this.setState({
                     data: response.data
                 })
