@@ -26,7 +26,7 @@ class UserNavigationInfo extends React.Component {
 
                     <div className="user-text" onClick={this.navigateToUrl}>{currentUser.profileUrl}</div>
                 </div>
-                <div className="close-button" onClick={() => this.props.onUserRemoved(null)}>✘</div>
+                <div className="close-button" onClick={() => this.props.onUserRemoved()}>✘</div>
             </div>
         );
     }

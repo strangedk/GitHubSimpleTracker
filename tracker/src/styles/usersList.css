@@ -12,6 +12,7 @@
 
 .user-items-container-list {
     display: inline;
+    padding-top: 3px;
 }
 
 .user-item {

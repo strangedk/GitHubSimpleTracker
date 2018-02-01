@@ -13,6 +13,15 @@ class RepoList extends React.Component {
             });
     };
 
+    getCommits = (repo) => {
+        axios.get(repo.commitsUrl.replace("{/sha}", ""))
+            .then((response) => {
+                this.props.onRepoChanged(response.data);
+            }).catch(() => {
+            console.log("Error commit loading");
+        });
+    };
+
     constructor(props) {
         super(props);
 
@@ -29,17 +38,18 @@ class RepoList extends React.Component {
     };
 
     render() {
-        return (<ul className="repos-container">
-            {
-                this.state.repos && this.state.repos.map((item, index) => {
-                    return <li className="repos-item" key={index} onClick={() => this.navigateToUrl(item.link)}>{item.name}</li>;
-                })
-            }
-        </ul>)
-    }
-
-    navigateToUrl = (link) => {
-        document.location.href = link;
+        return (
+            <div className="repos-container">
+                <b>Repositories</b>
+                <ul className="repos-list">
+                    {
+                        this.state.repos && this.state.repos.map((item, index) => {
+                            return <li className="repos-item" key={index}
+                                       onClick={() => this.getCommits(item)}>{item.name}</li>;
+                        })
+                    }
+                </ul>
+            </div>)
     }
 }
 

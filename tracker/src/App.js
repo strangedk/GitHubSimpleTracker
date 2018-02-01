@@ -4,20 +4,30 @@ import axios from "axios";
 import UserNavigationInfo from "./components/userNavigationInfo";
 import UsersList from "./components/usersList";
 import RepoList from "./components/repoList";
+import CommitChart from "./components/commitChart";
 
 import "./styles/App.css";
 
 class App extends Component {
+    // Select users with > 1000 repos in the account.
     GET_USERS_URL = "https://api.github.com/search/users?q=repos:%3E1000&per_page=1000";
+
     updateData = (response) => {
         this.setState({
-            totalUsersCount: response.total_count,
+            data: response.data
         })
     };
 
     userChangedHandler = (currentUser) => {
         this.setState({
-            currentUser
+            currentUser,
+            currentRepoCommits:null
+        })
+    };
+
+    repoChangedHandler = (currentRepoCommits) => {
+        this.setState({
+            currentRepoCommits
         })
     };
 
@@ -27,7 +37,7 @@ class App extends Component {
         this.state = {
             totalUserReposCount: 0,
             currentUser: null, // typeof UserData
-            currentRepo: null,
+            currentRepoCommits: null,
             data: {
                 "total_count": 589,
                 "incomplete_results": false,
@@ -2047,6 +2057,9 @@ class App extends Component {
     render() {
         const {data} = this.state;
         const {currentUser} = this.state;
+        const {currentRepoCommits} = this.state;
+        const commitChart = currentRepoCommits && currentUser ?
+            <CommitChart currentRepoCommits={currentRepoCommits}/> : null;
 
         return (
             <div className="app-container">
@@ -2060,9 +2073,11 @@ class App extends Component {
 
                 {
                     (currentUser)
-                        ? <RepoList currentUser={currentUser}/>
+                        ? <RepoList currentUser={currentUser} onRepoChanged={this.repoChangedHandler}/>
                         : <div className="select-user-message">{`< Select user from the list`}</div>
                 }
+
+                {commitChart}
 
             </div>
         );
