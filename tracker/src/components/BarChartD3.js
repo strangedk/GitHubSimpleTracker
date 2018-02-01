@@ -53,10 +53,6 @@ class BarChartD3 extends React.Component {
         });
     };
 
-    constructor(props) {
-        super(props);
-    }
-
     componentWillReceiveProps(newProps) {
         this.updateInfoData(newProps);
     }

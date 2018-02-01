@@ -4,15 +4,27 @@ import UserListInfo from "./userListInfo";
 import "../styles/usersList.css";
 
 class UsersList extends React.Component {
+
+    updateData = (props) => {
+        const data = UserData.build(props.data);
+
+        this.setState({
+            users: data.users,
+            totalUsersCount: data.total
+        })
+    };
+
     constructor(props) {
         super(props);
 
-        const data = UserData.build(props.data);
-
         this.state = {
-            users: data.users,
-            totalUsersCount: data.total
+            users: [],
+            totalUsersCount: 0
         };
+    }
+
+    componentWillReceiveProps(newProps) {
+        this.updateData(newProps);
     }
 
     render () {

@@ -16,6 +16,7 @@ class UserData {
     static build(dto) {
         const result = [];
         const items = dto.items;
+        console.log(dto);
         for (let u in items) {
             const user = new UserData();
 

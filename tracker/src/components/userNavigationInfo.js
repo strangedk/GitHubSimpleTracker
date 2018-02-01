@@ -2,10 +2,6 @@ import React from 'react';
 import "../styles/userNavigationInfo.css";
 
 class UserNavigationInfo extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         const {currentUser} = this.props;
 
@@ -17,7 +13,7 @@ class UserNavigationInfo extends React.Component {
 
         return (
             <div className="user-info-container-selected">
-                <img className="avatar" src={currentUser.avatar}/>
+                <img className="avatar" src={currentUser.avatar} alt="User avatar"/>
                 <div className="user-text-container">
                     <div>
                         <div className="user-text">{currentUser.login}</div>
