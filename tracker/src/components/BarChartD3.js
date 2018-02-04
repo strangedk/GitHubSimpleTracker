@@ -1,7 +1,7 @@
 import React from "react"
 
 import {scaleLinear} from "d3-scale"
-import {max, min} from "d3-array"
+import {max} from "d3-array"
 import {select} from "d3-selection"
 
 import "../styles/barChartD3.css";
@@ -18,6 +18,24 @@ class BarChartD3 extends React.Component {
         const yScale = scaleLinear()
             .domain([0, dataMax])
             .range([0, this.props.height]);
+
+        select(node)
+            .selectAll("text")
+            .data(this.props.data)
+            .enter()
+            .append("text");
+
+        select(node)
+            .selectAll("text")
+            .data(this.props.data)
+            .exit()
+            .remove();
+
+        select(node)
+            .selectAll("text")
+            .attr('x', (d, i) => {return (i * 20) - 3})
+            .attr('y', (d, i) => {return this.props.height - yScale(d) - 2})
+            .text((d, i) => {return d});
 
         select(node)
             .selectAll("rect")
@@ -38,28 +56,42 @@ class BarChartD3 extends React.Component {
             .attr('x', (d, i) => i * 20)
             .attr('y', d => this.props.height - yScale(d))
             .attr('height', d => yScale(d))
-            .attr('width', 5);
+            .attr('width', 10)
+            .attr('key', (d, i) => i)
+            .on("mousemove", (d, i) => this.onMouseMove(d, i))
+            .on("mouseout", (d, i) => this.onMouseOut);
+    };
+    onMouseMove = (d, i) => {
+        this.showTooltip(d);
+    };
+    onMouseOut = (e) => {
+        this.hideTooltip();
+    };
+    showTooltip = (data, index) => {
+        const chart = document.getElementById("chart");
+
+        this.tooltip.x = chart.clientX;
+        this.tooltip.y = chart.clientY;
+
+        if (this.tooltip.style.visibility === "visible")
+            return;
+
+        this.tooltip.innerHTML = <b>{
+            "commits count: " + data
+        }</b>;
+
+        this.tooltip.style.visibility = "visible";
+    };
+    hideTooltip = () => {
+        this.tooltip.visibility = "hidden";
     };
 
-    updateInfoData = (newProps) => {
-        let minValue = min(newProps.data);
-        let maxValue = max(newProps.data);
-
-        this.setState({
-            minValue: minValue,
-            maxValue: maxValue,
-            minMonth: newProps.data.indexOf(minValue),
-            maxMonth: newProps.data.lastIndexOf(maxValue)
-        });
-    };
-
-    componentWillReceiveProps(newProps) {
-        this.updateInfoData(newProps);
+    get tooltip() {
+        return document.getElementById("chartTooltip");
     }
 
     componentDidMount() {
         this.updateChartComponent();
-        this.updateInfoData(this.props);
     }
 
     componentDidUpdate() {
@@ -67,24 +99,23 @@ class BarChartD3 extends React.Component {
     }
 
     render() {
-        const showData = !!this.state;
-        if (showData) {
-            const maxMonthString = this.monthes[this.state.maxMonth];
-            const minMonthString = this.monthes[this.state.minMonth];
-            const theBestMonth = "The best is " +
-                maxMonthString + " : " +
-                this.state.maxValue + " commits";
-
-            var dataMonth = (this.state.maxValue > 0) ? <div>{theBestMonth}</div> : null;
-        }
-
         return (
-            <div className="bar-chart-container">
-                {dataMonth}
-
+            <div id="chart" className="bar-chart-container">
                 <svg ref={(node) => {
                     this.node = node
                 }} width={this.props.width} height={this.props.height}/>
+
+                <div className="chart-monthes">
+                    {
+                        this.monthes.map((item, index) => {
+                            return <small key={index}>
+                                {index + 1}
+                            </small>
+                        })
+                    }
+                </div>
+
+                <div id="chartTooltip" className="chart-tooltip"/>
             </div>
         );
     }

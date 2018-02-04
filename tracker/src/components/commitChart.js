@@ -42,8 +42,8 @@ class CommitChart extends React.Component {
     render() {
         return (
             <BarChartD3 color={"#fa0"}
-                        data={this.state.data}
-                        width={500} height={380}/>
+                        data={[10,20,30,40,50,60,70,80,90,100,110,120]}
+                        width={300} height={350}/>
         )
     }
 }

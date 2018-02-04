@@ -19,8 +19,6 @@ class UserData {
 
         items = [fakeUserAngular, fakeUserFB].concat(items);
 
-        console.log(items);
-
         for (let u in items) {
             const user = new UserData();
 
