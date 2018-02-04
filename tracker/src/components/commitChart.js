@@ -1,5 +1,5 @@
 import React from "react";
-import BarChartD3 from "./BarChartD3";
+import BarChartD3 from "./barChartD3";
 
 class CommitChart extends React.Component {
     updateData = (newProps) => {
@@ -42,7 +42,7 @@ class CommitChart extends React.Component {
     render() {
         return (
             <BarChartD3 color={"#fa0"}
-                        data={[10,20,30,40,50,60,70,80,90,100,110,120]}
+                        data={this.state.data}
                         width={300} height={350}/>
         )
     }

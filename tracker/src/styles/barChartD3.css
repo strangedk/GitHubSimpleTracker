@@ -1,3 +1,6 @@
+.chart {
+    display: block;
+}
 .bar-chart-container {
     overflow: hidden;
     background: cornsilk;
@@ -11,13 +14,25 @@
 }
 
 .bar-chart-container > svg {
-    margin-top: 20px;
+    margin-top: 1px;
+    padding-right: 5px;
+    border-bottom: black 1px solid;
 }
 
 .bar-chart-container > svg > text {
-    min-width: 20px;
+    min-width: 30px;
     font-size: 10px;
     text-align: center;
+    cursor: pointer;
+}
+
+.bar-chart-container > svg > rect {
+    cursor: pointer;
+}
+
+.bar-chart-container > svg > rect:hover {
+    stroke: #000;
+    stroke-width: 0.5px;
 }
 
 .chart-monthes {
@@ -26,24 +41,23 @@
 
 .chart-monthes > small {
     min-width: 20px;
-}
-
-rect {
     cursor: pointer;
 }
 
-rect:hover {
-    border: solid 1px #aaf;
+.chart-tooltip-holder {
+    height: 5px;
 }
 
 .chart-tooltip {
-    display: none;
-    top: 0;
-    left: 0;
+    display:none;
+    font-size: 12px;
     position: relative;
     padding: 2px;
-    border: solid 1px #333333;
-    border-radius: 2px;
-    background: #fff;
-    visibility: hidden;
+    padding-left: 5px;
+    padding-right: 5px;
+    border: solid 1px #aaaaaa;
+    border-radius: 3px;
+    background: #ffffffcc;
+    visibility: visible;
+    z-index: 100;
 }
