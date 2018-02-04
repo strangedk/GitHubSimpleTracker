@@ -76,7 +76,7 @@ class BarChartD3 extends React.Component {
             return;
 
         let bar = document.getElementById("bar" + i);
-        let pointY = (Math.floor(this.props.height - bar.height.baseVal.value));
+        let pointY = (Math.floor(this.props.height - bar.height.baseVal.value - 10));
         let pointX = (Math.floor(bar.x.baseVal.value + 5));
 
         if (i >= this.monthes.length - this.monthes.length / 3) {
