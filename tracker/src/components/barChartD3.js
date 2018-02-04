@@ -32,14 +32,14 @@ class BarChartD3 extends React.Component {
             .remove();
 
         select(node)
-            .selectAll('rect')
+            .selectAll("rect")
             .data(this.props.data)
-            .style('fill', this.props.color)
-            .attr('x', (d, i) => i * 20)
-            .attr('y', d => this.props.height - yScale(d))
-            .attr('height', d => yScale(d))
-            .attr('width', 10)
-            .attr('id', (d, i) => ("bar" + i))
+            .style("fill", this.props.color)
+            .attr("x", (d, i) => i * 20)
+            .attr("y", d => this.props.height - yScale(d))
+            .attr("height", d => yScale(d))
+            .attr("width", 10)
+            .attr("id", (d, i) => ("bar" + i))
             .on("mousemove", (d, i) => this.onMouseMove(d, i))
             .on("mouseover", (d, i) => this.onMouseOver(d, i))
             .on("mouseout", () => this.onMouseOut());
@@ -58,13 +58,13 @@ class BarChartD3 extends React.Component {
 
         select(node)
             .selectAll("text")
-            .attr('x', (d, i) => {
+            .attr("x", (d, i) => {
                 return (i * 20)
             })
-            .attr('y', (d, i) => {
+            .attr("y", (d) => {
                 return this.props.height - yScale(d) - 3
             })
-            .text((d, i) => {
+            .text((d) => {
                 return d === 0 ? "" : d
             });
     };
