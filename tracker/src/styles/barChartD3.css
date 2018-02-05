@@ -60,4 +60,5 @@
     background: #ffffffcc;
     visibility: visible;
     z-index: 100;
+    transition: all 200ms ease-out;
 }
